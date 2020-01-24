@@ -29,6 +29,9 @@ var options = {
     path: path.join(__dirname, "build"),
     filename: "[name].bundle.js"
   },
+  optimization: {
+		minimize: false // <---- disables uglify.
+  },
   module: {
     rules: [
       {
@@ -59,18 +62,24 @@ var options = {
   },
   plugins: [
     // clean the build folder
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: ['!manifest.json']
+    }),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin(["NODE_ENV"]),
     new CopyWebpackPlugin([{
       from: "src/manifest.json",
       transform: function (content, path) {
         // generates the manifest file using the package.json informations
-        return Buffer.from(JSON.stringify({
+        var manifest = {
           description: process.env.npm_package_description,
           version: process.env.npm_package_version,
           ...JSON.parse(content.toString())
-        }))
+        }
+        if (env.NODE_ENV === 'production') {
+          delete manifest.content_security_policy;
+        }
+        return Buffer.from(JSON.stringify(manifest))
       }
     }]),
     new HtmlWebpackPlugin({

@@ -1,9 +1,6 @@
-import "../css/popup.css";
-import Greeting from "./popup/greeting_component.jsx";
-import React from "react";
-import { render } from "react-dom";
+import "../css/popup.css"
+import Popup from "./Popup"
+import React from "react"
+import ReactDOM from 'react-dom'
 
-render(
-  <Greeting/>,
-  window.document.getElementById("app-container")
-);
+ReactDOM.render(<Popup />, document.getElementById('root'))

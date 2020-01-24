@@ -1,6 +1,8 @@
 {
-  "name": "Chrome Extension Webpack",
-  "options_page": "options.html",
+  "name": "HM Extension",
+  "options_ui": {
+    "page": "options.html"
+  },
   "background": {
     "page": "background.html"
   },
