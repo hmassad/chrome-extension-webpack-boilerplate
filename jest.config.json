@@ -1,0 +1,6 @@
+{
+  "automock": false,
+  "setupFilesAfterEnv": [
+    "<rootDir>/jest.setup.js"
+  ]
+}
