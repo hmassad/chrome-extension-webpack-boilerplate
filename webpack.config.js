@@ -8,7 +8,7 @@ var webpack = require("webpack"),
     WriteFilePlugin = require("write-file-webpack-plugin");
 
 // load the secrets
-var alias = {};
+var alias = { 'react-dom': '@hot-loader/react-dom' }
 
 var secretsPath = path.join(__dirname, ("secrets." + env.NODE_ENV + ".js"));
 
