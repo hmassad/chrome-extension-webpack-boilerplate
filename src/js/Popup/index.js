@@ -4,16 +4,13 @@ import CustomImage from "./CustomImage"
 
 export default hot(module)(() => {
 
-  const [s, setS] = React.useState('initial')
+  const [s, setS] = React.useState(null)
 
   React.useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
-    .then((response) => {
-      return response.json();
-    })
-    .then((myJson) => {
-      setS(myJson)
-    });
+    .then(response => response.json())
+    .then(setS)
+    .catch(console.error)
   }, [])
 
   const handleClick = () => {
@@ -27,7 +24,7 @@ export default hot(module)(() => {
       <span style={{backgroundColor: "green"}}>Verde HOT Reload</span>
       <div>{new Date().toISOString()}</div>
       <CustomImage />
-      { s && <div>{JSON.stringify(s)}</div> }
+      { s && <h3 id="response">{JSON.stringify(s)}</h3> }
       <button onClick={handleClick}>Press to see an alert</button>
     </div>
   )
